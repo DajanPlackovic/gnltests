@@ -43,7 +43,6 @@ void	test_read_error(char *file)
 		free(text);
 	}
 	close(fd);
-	fd = -1;
 	text = get_next_line(fd);
 	if (text)
 		ft_putstr_fd(text, 1);
