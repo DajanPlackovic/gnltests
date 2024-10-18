@@ -60,6 +60,24 @@ void	test_read_error(char *file)
 	ft_putstr_fd("\n----\n", 1);
 }
 
+void	test_stdin()
+{
+	char	*text;
+
+	ft_putstr_fd("STDIN", 1);
+	ft_putstr_fd("\n----\n", 1);
+	do
+	{
+		text = get_next_line(0);
+		if (text)
+		{
+			ft_putstr_fd(text, 1);
+			free(text);
+		}
+	} while (text);
+	ft_putstr_fd("\n----\n", 1);
+}
+
 int	main(int argc, char *argv[])
 {
 	if (argc == 1)
@@ -67,10 +85,12 @@ int	main(int argc, char *argv[])
 	else
 	{
 		for (int i = 1; i < argc; i++)
-			if (strcmp(argv[i], "read_error.txt"))
-				test(argv[i]);
-			else
+			if (!strcmp(argv[i], "read_error.txt"))
 				test_read_error(argv[i]);
+			else if (!strcmp(argv[i], "stdin"))
+				test_stdin();
+			else
+				test(argv[i]);
 	}
 	return (0);
 }
